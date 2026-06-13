@@ -182,9 +182,16 @@ with tab2:
     glm_preds = np.array(results["glm_preds"])
     xgb_preds = np.array(results["xgb_preds"])
 
-    c1, c2 = st.columns(2)
-    c1.metric("GLM MSE",     f"{results['glm_mse']:,.0f}")
-    c2.metric("XGBoost MSE", f"{results['xgb_mse']:,.0f}")
+    from src.utils import gini_coefficient
+
+    glm_gini = gini_coefficient(actual, glm_preds)
+    xgb_gini = gini_coefficient(actual, xgb_preds)
+
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("GLM MSE",      f"{results['glm_mse']:,.0f}")
+    c2.metric("XGBoost MSE",  f"{results['xgb_mse']:,.0f}")
+    c3.metric("GLM Gini",     f"{glm_gini:.4f}")
+    c4.metric("XGBoost Gini", f"{xgb_gini:.4f}")
 
     # Lift curves by decile
     comparison_df = pd.DataFrame({
@@ -221,6 +228,19 @@ with tab2:
     axes[1].set_title("XGBoost Residuals")
     axes[1].set_xlabel("Predicted"); axes[1].set_ylabel("Residual")
     st.pyplot(fig3)
+    # Feature importance
+    st.subheader("XGBoost Feature Importance")
+    importance_df = pd.DataFrame({
+        "feature":   X_train.columns,
+        "importance": xgb_model.feature_importances_
+    }).sort_values("importance", ascending=False).head(15)
+
+    fig_imp = px.bar(importance_df, x="importance", y="feature",
+                     orientation="h",
+                     title="Top 15 Features — XGBoost Importance",
+                     labels={"importance": "Importance Score", "feature": "Feature"})
+    fig_imp.update_layout(yaxis={"categoryorder": "total ascending"})
+    st.plotly_chart(fig_imp, use_container_width=True)
 
 
 # ════════════════════════════════════════════════════════════════════════════════
