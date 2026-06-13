@@ -1,0 +1,10 @@
+streamlit
+pandas
+numpy
+scikit-learn
+statsmodels
+xgboost
+shap
+matplotlib
+plotly
+openml

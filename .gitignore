@@ -1,0 +1,20 @@
+# Virtual environment
+venv/
+
+# Data cache
+data/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+
+# Streamlit
+.streamlit/secrets.toml
