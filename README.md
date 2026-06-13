@@ -14,7 +14,7 @@ An actuarially-grounded insurance risk modeling tool implementing the classical
 frequency-severity pricing framework used by real insurance companies.
 
 ## Live Demo
-🚀 [Coming soon]
+🚀 🚀 [Live Demo](https://huggingface.co/spaces/gayadav/InsureIQ)
 
 ## Overview
 
