@@ -1,3 +1,13 @@
+---
+title: InsureIQ
+emoji: 🛡️
+colorFrom: blue
+colorTo: indigo
+sdk: streamlit
+sdk_version: "1.45.1"
+app_file: app.py
+pinned: false
+---
 # 🛡️ InsureIQ
 
 An actuarially-grounded insurance risk modeling tool implementing the classical
